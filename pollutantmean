@@ -1,0 +1,30 @@
+pollutantmean <- function(directory, pollutant, id)
+{
+####Setting type of polution  
+  if (pollutant == "nitrate")
+  {
+    type = 3;
+  }
+  if (pollutant == "sulfate")
+  {
+    type = 4;
+  }
+#######Binding all files together  
+  setwd(directory);
+  files = list.files(directory, full.names = TRUE)
+  pol_data = data.frame();
+  for (i in 1:332)
+  {
+    pol_data = rbind(pol_data, read.csv(files[i]))
+  }
+###Creating a subset of files from id input  
+  pollute_subset = data.frame()
+  for (j in id)
+  {
+    pollute_subset = rbind(pollute_subset, pol_data[which(pol_data[, "ID"] == j),])
+  }
+###finding actual average
+  polavg = mean(pollute_subset[ ,type], na.rm=TRUE)
+
+}
+
