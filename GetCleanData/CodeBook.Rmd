@@ -1,0 +1,33 @@
+---
+title: "CodeBook"
+author: "David"
+date: "November 20, 2015"
+output: html_document
+---
+This CodeBook goes with the run_anaylsis.R program. Read the README.Rmd file for more information. This program outputs a tidy [180x68] dataset of the averages of the mean and standard deviation values from the UCI measurements. The dataset contains a column for the Subject ID, Activity (walking, etc) and 66 columns for mean and standard deviation of each measurement (tBodyAccmean()-x, etc). All 30 subjects have completed each of the 6 activities. And there is a average measurment for each subject for each activity (i.e. 30 subjects*6 activities = 180 values for each measurements). Each measurement name is shown below. There are 24 XYZ measurements and 9 non-XYZ for a total of 33 measurements. Since this program calculates the mean and standard deviation for each there is a total of 66 columns. 
+
+tBodyAcc-XYZ
+tGravityAcc-XYZ
+tBodyAccJerk-XYZ
+tBodyGyro-XYZ
+tBodyGyroJerk-XYZ
+tBodyAccMag
+tGravityAccMag
+tBodyAccJerkMag
+tBodyGyroMag
+tBodyGyroJerkMag
+fBodyAcc-XYZ
+fBodyAccJerk-XYZ
+fBodyGyro-XYZ
+fBodyAccMag
+fBodyAccJerkMag
+fBodyGyroMag
+fBodyGyroJerkMag
+
+Once the files are loaded into the program. It begins pre-processing. The first step is to recombind the test and train vectors for each the y, x, subject vectors. The program does this by using the rbind() command the append the train to the test vectors/data frames. Once that is completed the program appends the y and subject vectors to the x data frame. This is done by using the cbind() command. Finally, the program appends column headesr to each columnns. The y column is named Activity, the subject column is named Subject (big surpise) and each x column uses the corresponding features vector. 
+
+Next the program uses the select() command to filter out any measurements (x values) that are not the mean or standard deviation. For example the mean of body acceleration in the x, y, and z directions. It also selects the subject and activity columns. Secondly, the program uses the gsub() command to replace the y values (1-6) with the corresponding activity (Walking, WalkingUpstairs, etc) from the labels vector. 
+
+Finally, the last step takes the average of each value over both the subject and the activity. For example, it will calculate the average of MeanBodyAcceleration in the X direction for all cases of Subject 1 WalkingDownstairs. It will find the average for all 561 measurements. This is completed using the aggregate() command. Using the write.table() command the output is a text file called tinydata.txt.
+
+

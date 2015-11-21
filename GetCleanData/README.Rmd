@@ -1,0 +1,13 @@
+---
+title: "README"
+author: "David"
+date: "November 19, 2015"
+---
+This program assumes you have downloaded and unzipped the data from (http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones). The run_anaylsis.R program uses Human activity data from a Samsung Galaxy S II. The device used the embedded acceleromator and gyroscope to collect data from 30 humans completing six activities: Walking, Walking Upstairs, Walking Downstairs, Sitting, Standing and Laying down. The data from UCI contains 561 points of data, e.g. max, min, mean of Body Acceleration in the x,y,z directions. The intial data was processed by University of California Irvine The files: activity_labels.txt, features.txt, X_test.txt, X_train.txt, y_test.txt, y_train.txt, subject_test.txt, subject_train.txt will need to all be in your working directory for this program to run correctly. 
+
+The 'labels' variable is a vector of the 6 different activities. The ytrain and ytest variables are vectors with numbers ranging from 1-6 corresponding to the activities. The subjecttest and subjecttrain variables are vectors of the randomly split subject IDs. They range from 1-30. These two variables (y and subject) correspond directly with the xtest and xtrain variables. The x variables are matrices of the 561 measurement values. In other words, there are 10299 cases (multiple cases of 30 subjects each doing 6 activities) each with the 561 measurements. 
+
+It is assumed that the data is straight from the website with no preprocessing. This program does not use any of the Interia Signals files so those do not need to be present in order for this program to run.The data was randomly split up between testing and training data, 70% of the data was in the training set and 30% of the data was in the test set.  
+
+This program recombines the test and training data sets for the y, subject and x files. The program then creates 1 data frame with the subject IDs, y values (corresponding to the activities) and the x data frame. It then filters out all measurements (from the x.txt files) except for the mean() and std() values.  assigns headers for the data frame and takes the average of the mean and standard deviation values for each measurement in the data set. Finally this program takes the average across of each mean/std measurement accross each Subject's activities. 
+
